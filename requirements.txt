@@ -1,0 +1,6 @@
+yfinance
+cmdstanpy==0.9.68
+pystan
+prophet
+plotly
+streamlit

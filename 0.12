@@ -1,0 +1,8 @@
+Collecting importlib-metadata
+  Using cached importlib_metadata-4.10.0-py3-none-any.whl (17 kB)
+Collecting typing-extensions>=3.6.4
+  Using cached typing_extensions-4.0.1-py3-none-any.whl (22 kB)
+Collecting zipp>=0.5
+  Using cached zipp-3.6.0-py3-none-any.whl (5.3 kB)
+Installing collected packages: zipp, typing-extensions, importlib-metadata
+Successfully installed importlib-metadata-4.10.0 typing-extensions-4.0.1 zipp-3.6.0
