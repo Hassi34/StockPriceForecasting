@@ -94,7 +94,7 @@ PyMeeus
 pyOpenSSL 
 pyparsing 
 PyQt5==5.12.3
-PyQt5_sip==4.19.18
+PyQt5_sip
 PyQtChart==5.12
 PyQtWebEngine==5.12.1
 pyrsistent 
