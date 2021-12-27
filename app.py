@@ -48,7 +48,7 @@ if lets_go:
 
     helper.ma_comparison(data)
     
-    with st.spinner(f'Generating the forecaset for {period} days, please stay with me...'):
+    with st.spinner(f'Generating the forecast for {period} days, please stay with me...'):
         df_train = data[['Date','Close']]
         df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
 
@@ -79,3 +79,9 @@ if lets_go:
     st.header("Forecast components")
     fig2 = m.plot_components(forecast)
     st.write(fig2)
+
+    st.header('Get the Code')
+    github_link = '[GitHub](https://github.com/Hassi34/StockPriceForecasting.git)'
+    st.markdown(github_link, unsafe_allow_html=True)
+    portfolio_link = '[My Portfolio](https://hasnainmehmood.pythonanywhere.com/)'
+    st.markdown(portfolio_link, unsafe_allow_html=True)
