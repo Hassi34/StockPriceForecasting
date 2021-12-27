@@ -1,0 +1,10 @@
+HEROKU_APP_NAME : real-time-stock-forecast
+HEROKU_EMAIL_ID : sendingtrends@gmail.com
+HEROKU_API_KEY : d449d1f8-5458-41ad-8535-fb7b69c68cde
+
+DOCKER_ID : hassi35
+DOCKER_PASSWORD : 
+
+
+
+docker build -t stock-forecasting:latest

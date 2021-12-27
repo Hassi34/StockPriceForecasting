@@ -48,7 +48,7 @@ if lets_go:
 
     helper.ma_comparison(data)
     
-    with st.spinner(f'Generating the forecaset for {period} year, please stay with me...'):
+    with st.spinner(f'Generating the forecaset for {period} days, please stay with me...'):
         df_train = data[['Date','Close']]
         df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
 
