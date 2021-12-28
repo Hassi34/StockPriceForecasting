@@ -8,6 +8,7 @@ page_icon="🎢",
 layout="wide",
 initial_sidebar_state="expanded")
 from datetime import date, datetime
+import pandas as pd
 
 import yfinance as yf
 from fbprophet import Prophet
@@ -41,6 +42,7 @@ if lets_go:
     data_load_state = st.text('Loading data...')
     data = helper.load_data(selected_stock, start_date, end_date)
     data_load_state.text('Data Loaded Successfully!')
+    data['Date'] = pd.to_datetime(data.Date).apply( lambda x : x.strftime("%Y-%m-%d"))
 
     st.subheader(f'Raw data from {start_date} ~ {end_date}')
     st.text('First Five Rows')
@@ -62,12 +64,13 @@ if lets_go:
         future = m.make_future_dataframe(periods=period)
         forecast = m.predict(future)
         df_forecast = forecast[['ds', 'yhat']].rename(columns={'ds':'Date','yhat':'Closing Price'}).tail(period)
+        df_forecast['Date'] = pd.to_datetime(df_forecast['Date']).apply(lambda x : x.strftime("%Y-%m-%d"))
         col1, col2 = st.columns(2)
         with col1: 
             helper.candlestick(data, selected_stock)
         with col2:
-            st. header('Initial 5 days of complete Forecast')
-            st.write(df_forecast.head(5).reset_index(drop=True))
+            st.text('First 10 days of complete Forecast')
+            st.write(df_forecast.head(10).reset_index(drop=True))
             df_to_download = df_forecast.to_csv(index=False).encode('utf-8')
             st.download_button(
             "Download complete Forecast",
@@ -84,7 +87,10 @@ if lets_go:
     st.header("Forecast components")
     fig2 = m.plot_components(forecast)
     st.write(fig2)
-
+    try:
+        helper.stocktwits(selected_stock)
+    except: 
+        pass
     st.header('Get the Code')
     github_link = '[GitHub](https://github.com/Hassi34/StockPriceForecasting.git)'
     st.markdown(github_link, unsafe_allow_html=True)

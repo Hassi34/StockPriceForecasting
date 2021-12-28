@@ -2,8 +2,9 @@ import streamlit as st
 import yfinance as yf
 from plotly import graph_objs as go
 import matplotlib.pyplot as plt
+import requests
 
-@st.cache(suppress_st_warning=True)
+@st.cache(suppress_st_warning=True, allow_output_mutation=True)
 def load_data(ticker, start_date, end_date):
     data = yf.download(ticker, start_date, end_date)
     st.text('load_data executed')
@@ -41,6 +42,17 @@ def candlestick(data, selected_stock):
                                 name=selected_stock)])
 
             fig.update_xaxes(type='category')
-            fig.update_layout(height=700)
+            fig.update_layout(height=500, title = 'Candlestick Chart')
 
             st.write(fig)
+
+def stocktwits(selected_stock):
+    r = requests.get(f"https://api.stocktwits.com/api/2/streams/symbol/{selected_stock}.json")
+    data = r.json()
+    if data['response']['status']==200:
+        st.subheader(f"Still not sure ? Don't worry we got you, check out what poeple are saying about '{selected_stock}'")
+    for message in data['messages']:
+        st.image(message['user']['avatar_url'])
+        st.write(message['user']['username'])
+        st.write(message['created_at'])
+        st.write(message['body'])
