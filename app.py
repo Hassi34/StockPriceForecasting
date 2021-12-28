@@ -21,14 +21,19 @@ st.title('Stock Forecast App')
 
 col1, col2, col3, col4 = st.columns(4)
 with col1 :
-    selected_stock = st.text_input('Enter Stock Ticker', 'AAPL')
+    selected_stock = st.text_input('Enter Ticker Symbol e.g. "BTC-USD" for Bitcoin', 'AAPL')
+    st.markdown('Not sure about the ticker symbol ? '+'[Search here!](https://finance.yahoo.com/)'
+                                                , unsafe_allow_html=True)
 with col2 :
     start_date = st.text_input('Enter Start Date e.g, 1996-01-01 ', '1996-01-01')
+    st.write('System will use this data to train the model for forecasting')
 with col3:
     end_date = st.text_input(f'Enter End Date e.g {TODAY} ', TODAY)
+    st.write('Kindly follow the given specific date format')
 with col4:
     n_years = st.slider('Years of prediction:', 1, 5)
     period = n_years * 365
+    st.write('Select the number of years price is required to be predicted for.')
 
 lets_go = st.button('Make Prediction')
 
@@ -47,8 +52,8 @@ if lets_go:
     st.write(data.describe())
 
     helper.ma_comparison(data)
-    
-    with st.spinner(f'Generating the forecast for {period} days, please stay with me...'):
+
+    with st.spinner(f'Generating the Forecast for {period} days in future, please stay with me ☺'):
         df_train = data[['Date','Close']]
         df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
 
@@ -56,16 +61,16 @@ if lets_go:
         m.fit(df_train)
         future = m.make_future_dataframe(periods=period)
         forecast = m.predict(future)
-        df_forecast = forecast[['ds', 'yhat']].tail(period)
+        df_forecast = forecast[['ds', 'yhat']].rename(columns={'ds':'Date','yhat':'Closing Price'}).tail(period)
         col1, col2 = st.columns(2)
         with col1: 
-            helper.plot_raw_data(data)
+            helper.candlestick(data, selected_stock)
         with col2:
             st. header('Initial 5 days of complete Forecast')
-            st.table(df_forecast.head(5))
-            df_to_download = df_forecast.rename(columns={'ds':'Date', 'yhat':'Closing Price'}).to_csv(index=False).encode('utf-8')
+            st.write(df_forecast.head(5).reset_index(drop=True))
+            df_to_download = df_forecast.to_csv(index=False).encode('utf-8')
             st.download_button(
-            "Download complete forecasting",
+            "Download complete Forecast",
             df_to_download,
             f"stock-forecast-downloaded-{datetime.now().strftime('%H:%M:%S')}.csv",
             "text/csv",

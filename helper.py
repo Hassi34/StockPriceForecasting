@@ -19,13 +19,28 @@ def plot_raw_data(data):
 
 def ma_comparison(df):
     with st.spinner('Generating The Moving Average Comparison for you...'):
-        st.subheader('Closing Price Vs Time Chart with 100MA & 200MA')
+        st.subheader('Closing Price Vs Time Chart with 20MA, 100MA & 200MA')
+        ma20 = df.Close.rolling(20).mean()
         ma100 = df.Close.rolling(100).mean()
         ma200 = df.Close.rolling(200).mean()
         fig = plt.figure(figsize=(12,6))
         plt.plot(df.Close, 'b', label = 'Daily Stock Trend')
+        plt.plot(ma20, 'm', label='20 Days MA')
         plt.plot(ma100, 'r', label = '100 Days MA')
         plt.plot(ma200, 'g', label = '200 Days MA')
         plt.legend()
         st.pyplot(fig)
         st.success('Moving Average Comparision Generated!')
+def candlestick(data, selected_stock):
+        with st.spinner('Creating the candlestick chart...'):
+            fig = go.Figure(data=[go.Candlestick(x=data['Date'],
+                                open=data['Open'],
+                                high=data['High'],
+                                low=data['Low'],
+                                close=data['Close'],
+                                name=selected_stock)])
+
+            fig.update_xaxes(type='category')
+            fig.update_layout(height=700)
+
+            st.write(fig)
