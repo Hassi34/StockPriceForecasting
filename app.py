@@ -9,6 +9,7 @@ page_icon="🎢",
 layout="wide")
 stocks = stockForecasting.StockForecasting()
 st.sidebar.title('Real-time Forecating App')
+st.sidebar.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROf1dea9H0pSgxQPa_u8vZraz3EtMkeS3K9rjwmlDTJj_WV0WxA_82oa5w-3r7vty8SH0&usqp=CAU')
 option = st.sidebar.radio(
      'What kind of analysis you want to perform ?',
      ('Stock Price Prediction', 'Custom Prediction'))

@@ -10,8 +10,6 @@ class StockForecasting:
     def __init__(self):
         pass 
     def stock_forecast(self):
-        #st.image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROf1dea9H0pSgxQPa_u8vZraz3EtMkeS3K9rjwmlDTJj_WV0WxA_82oa5w-3r7vty8SH0&usqp=CAU', 
-        #            use_column_width='always')
         TODAY = date.today().strftime("%Y-%m-%d")
 
         #st.sidebar.title('Stock Forecast App')
