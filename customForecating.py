@@ -47,11 +47,11 @@ def custom_predictions():
                         st.write(fig2)
 
                 else :
-                    st.error("Could not run all test successfully, Please download the corrent format to complete the task")
+                    st.error("Could not pass all tests successfully, Please download the corrent format to complete the task")
                     df_required = pd.read_csv('https://raw.githubusercontent.com/Hassi34/Datasets/main/RequiredFormat.csv')
                     df_required = df_required.to_csv(index=False).encode('utf-8')
                     st.download_button(
-                    '📥 Download Correct Format',
+                    '📥 Download Required Format',
                     df_required,
                     "RequiredFormat.csv",
                     "text/csv",
@@ -59,11 +59,11 @@ def custom_predictions():
                     )
 
         except:
-            st.error("Could not run all test successfully, Please download the corrent format to complete the task")
+            st.error("Could not pass all tests successfully, Please download the corrent format to complete the task")
             df_required = pd.read_csv('https://raw.githubusercontent.com/Hassi34/Datasets/main/RequiredFormat.csv')
             df_required = df_required.to_csv(index=False).encode('utf-8')
             st.download_button(
-            '📥 Download Correct Format',
+            '📥 Download Required Format',
             df_required,
             "RequiredFormat.csv",
             "text/csv",

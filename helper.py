@@ -22,7 +22,7 @@ def plot_raw_data(data):
 
 def ma_comparison(df, target_col = "Close"):
     with st.spinner('Generating The Moving Average Comparison for you...'):
-        st.subheader('Closing Price Vs Time Chart with 20MA, 100MA & 200MA')
+        st.subheader('Forecast over Time with 20MA, 100MA & 200MA')
         ma20 = df[target_col].rolling(20).mean()
         ma100 = df[target_col].rolling(100).mean()
         ma200 = df[target_col].rolling(200).mean()
@@ -61,17 +61,17 @@ def stocktwits(selected_stock):
 def tests(data):
     success = True
     if len(data.columns) == 2:
-        st.success('Test Passed : There are 2 column in the data')
+        st.success('Test Passed : There are 2 columns in the data')
         columns = (data.columns).str.lower()
         if 'date' in columns:
-            st.success('Test Passed : "Date" column is available in the data.')
+            st.success('Test Passed : "Date" columns is available in the data.')
         elif 'date' not in columns:
             st.error('Test Failed : There is no "Date" Column avilable.' )
             success = False
         if 'y' in columns:
             st.success('Test Passed : "y" column is available in the data')
         elif 'y' not in columns:
-            st.error('Test Failed : There is no "y" Column avilable.')
+            st.error('Test Failed : There is no "y" column avilable.')
             success = False
  
     elif len(data.columns) != 2:
@@ -83,7 +83,7 @@ def validate_file(data):
         success = tests(data)
         if success: 
             st.balloons()
-            st.success('All test passed : Data has been validated successfully!')
+            st.success('All tests passed : Data has been validated successfully!')
     else : 
         data = pd.DataFrame(data)
         success = tests(data)
